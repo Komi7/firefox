@@ -1,2 +1,1 @@
-# firefox
-user.js for Firefox-based browsers
+## Thanks: [Narsil](https://codeberg.org/Narsil/user.js)
