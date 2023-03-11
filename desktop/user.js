@@ -634,7 +634,7 @@ user_pref("privacy.clearOnShutdown.sessions", true); // [DEFAULT: true]
 //
 // Set "Cookies" and "Site Data" to clear on shutdown
 user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
-user_pref("privacy.clearOnShutdown.offlineApps", true); // Site Data
+user_pref("privacy.clearOnShutdown.offlineApps", false); // Site Data
 // -------------------------------------
 // Set cache to clear on exit [FF96+]
 // user_pref("privacy.clearsitedata.cache.enabled", true);
