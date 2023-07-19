@@ -56,7 +56,7 @@ user_pref("geo.provider.ms-windows-location", false); // [WINDOWS]
 user_pref("geo.provider.use_corelocation", false); // [MAC]
 user_pref("geo.provider.use_gpsd", false); // [LINUX]
 user_pref("geo.provider.geoclue.always_high_accuracy", false); // [LINUX]
-user_pref("geo.provider.use_geoclue", false); [FF102+] [LINUX]
+user_pref("geo.provider.use_geoclue", false); // [FF102+] [LINUX]
 // -------------------------------------
 // Disable region updates
 user_pref("browser.region.network.url", ""); // [FF78+] Defense-in-depth
@@ -70,6 +70,8 @@ user_pref("intl.accept_languages", "en-US, en");
 // -------------------------------------
 // Use en-US locale regardless of the system or region locale
 user_pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
+user_pref("privacy.spoof_english", 2);
+user_pref("intl.locale.requested", "en-US");
 //
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // QUIETER FOX
@@ -105,6 +107,9 @@ user_pref("toolkit.telemetry.updatePing.enabled", false); // [FF56+]
 user_pref("toolkit.telemetry.bhrPing.enabled", false); // [FF57+] Background Hang Reporter
 user_pref("toolkit.telemetry.firstShutdownPing.enabled", false); // [FF57+]
 // -------------------------------------
+// Skip checking omni.ja and other files
+user_pref("corroborator.enabled", false);
+// -------------------------------------
 // Disable Telemetry Coverage
 user_pref("toolkit.telemetry.coverage.opt-out", true); // [HIDDEN PREF]
 user_pref("toolkit.coverage.opt-out", true); // [FF64+] [HIDDEN PREF]
@@ -116,6 +121,19 @@ user_pref("browser.ping-centre.telemetry", false);
 // Disable Firefox Home (Activity Stream) telemetry
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
+// -------------------------------------
+// Disable WebVTT logging and test events
+user_pref("media.webvtt.debug.logging", false);
+user_pref("media.webvtt.testing.events", false);
+// -------------------------------------
+// Disable send content blocking log to about:protections
+user_pref("browser.contentblocking.database.enabled", false);
+// -------------------------------------
+// Disable celebrating milestone toast when certain numbers of trackers are blocked
+user_pref("browser.contentblocking.cfr-milestone.enabled", false);
+// -------------------------------------
+// Disable Default Browser Agent
+user_pref("default-browser-agent.enabled", false); // [WINDOWS]
 //
 // STUDIES
 //
@@ -441,6 +459,13 @@ user_pref("dom.security.https_only_mode", true); // [FF76+]
 // -------------------------------------
 // Disable HTTP background requests [FF82+]
 user_pref("dom.security.https_only_mode_send_http_background_request", false);
+// -------------------------------------
+// Disable ping to Mozilla for Man-in-the-Middle detection
+user_pref("security.certerrors.mitm.priming.enabled", false);
+user_pref("security.certerrors.mitm.priming.endpoint", "");
+user_pref("security.pki.mitm_canary_issuer", "");
+user_pref("security.pki.mitm_canary_issuer.enabled", false);
+user_pref("security.pki.mitm_detected", false);
 //
 // UI (User Interface)
 //
@@ -487,9 +512,6 @@ user_pref("privacy.userContext.ui.enabled", true);
 // PLUGINS / MEDIA / WEBRTC
 // >>>>>>>>>>>>>>>>>>>>>
 //
-// Disable WebRTC (Web Real-Time Communication)
-user_pref("media.peerconnection.enabled", false);
-// -------------------------------------
 // Force WebRTC inside the proxy [FF70+]
 user_pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true);
 // -------------------------------------
@@ -563,6 +585,13 @@ user_pref("network.protocol-handler.external.ms-windows-store", false);
 // -------------------------------------
 // Disable permissions delegation [FF73+]
 user_pref("permissions.delegation.enabled", false);
+// -------------------------------------
+// Disable the default checkedness for "Save card and address to Firefox" checkboxes
+user_pref("dom.payments.defaults.saveAddress", false);
+user_pref("dom.payments.defaults.saveCreditCard", false);
+// -------------------------------------
+// Disable Displaying Javascript in History URLs
+user_pref("browser.urlbar.filter.javascript", true);
 //
 // DOWNLOADS
 //
@@ -634,7 +663,7 @@ user_pref("privacy.clearOnShutdown.sessions", true); // [DEFAULT: true]
 //
 // Set "Cookies" and "Site Data" to clear on shutdown
 user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
-user_pref("privacy.clearOnShutdown.offlineApps", false); // Site Data
+user_pref("privacy.clearOnShutdown.offlineApps", true); // Site Data
 // -------------------------------------
 // Set cache to clear on exit [FF96+]
 // user_pref("privacy.clearsitedata.cache.enabled", true);
@@ -775,6 +804,12 @@ user_pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
 // Disable page thumbnail collection
 // user_pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 // -------------------------------------
+// Disable Windows native notifications and use app notications instead [FF111+] [WINDOWS]
+// user_pref("alerts.useSystemBackend.windows.notificationserver.enabled", false);
+// -------------------------------------
+// Force GPU sandboxing (Linux, default on Windows)
+user_pref("security.sandbox.gpu.level", 1);
+// -------------------------------------
 // Enable Site Isolation
 user_pref("fission.autostart", true);
 user_pref("gfx.webrender.all", true);
@@ -871,6 +906,12 @@ user_pref("permissions.default.microphone", 2);
 user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.xr", 2); // Virtual Reality
 // -------------------------------------
+// Disable canvas capture stream
+user_pref("canvas.capturestream.enabled", false);
+// -------------------------------------
+// Disable offscreen canvas
+user_pref("gfx.offscreencanvas.enabled", false);
+// -------------------------------------
 // Disable non-modern cipher suites
 // user_pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false); // [DEFAULT: false FF109+]
 // user_pref("security.ssl3.ecdhe_ecdsa_aes_256_sha", false); // [DEFAULT: false FF109+]
@@ -919,7 +960,7 @@ user_pref("extensions.systemAddon.update.enabled", false); // [FF62+]
 user_pref("extensions.systemAddon.update.url", ""); // [FF44+]
 // -------------------------------------
 // Enable the DNT (Do Not Track) HTTP header
-// user_pref("privacy.donottrackheader.enabled", true);
+user_pref("privacy.donottrackheader.enabled", false);
 // -------------------------------------
 // Customize ETP settings
 // user_pref("network.cookie.cookieBehavior", 5); // [DEFAULT: 5 FF103+]
@@ -949,6 +990,9 @@ user_pref("dom.push.enabled", false);
 user_pref("dom.push.connection.enabled", false);
 user_pref("dom.push.serverURL", "");
 user_pref("dom.push.userAgentID", "");
+// -------------------------------------
+// Disable WebRTC (Web Real-Time Communication)
+user_pref("media.peerconnection.enabled", false);
 //
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // DON'T BOTHER: FINGERPRINTING
@@ -968,8 +1012,8 @@ user_pref("dom.push.userAgentID", "");
 // user_pref("general.useragent.override", "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0"); // [HIDDEN PREF]
 // user_pref("media.ondevicechange.enabled", false);
 // user_pref("media.video_stats.enabled", false);
-// user_pref("ui.use_standins_for_native_colors", true);
 // user_pref("webgl.enable-debug-renderer-info", false);
+user_pref("ui.use_standins_for_native_colors", true);
 user_pref("browser.display.use_document_fonts", 0);
 user_pref("device.sensors.enabled", false);
 user_pref("dom.gamepad.enabled", false);
@@ -979,6 +1023,12 @@ user_pref("dom.w3c_touch_events.enabled", 0);
 user_pref("dom.webaudio.enabled", false);
 user_pref("media.navigator.enabled", false);
 user_pref("media.webspeech.synth.enabled", false);
+// -------------------------------------
+// Disable API for measuring text width and height.
+user_pref("dom.textMetrics.actualBoundingBox.enabled", false);
+user_pref("dom.textMetrics.baselines.enabled", false);
+user_pref("dom.textMetrics.emHeight.enabled", false);
+user_pref("dom.textMetrics.fontBoundingBox.enabled", false);
 //
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // NON-PROJECT RELATED
